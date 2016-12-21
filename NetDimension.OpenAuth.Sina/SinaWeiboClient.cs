@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,15 @@ namespace NetDimension.OpenAuth.Sina
 			set;
 		}
 
-		public SinaWeiboClient(string appKey, string appSecret, string callbackUrl, string accessToken = null, string uid = null)
+        public override string UserID
+        {
+            get
+            {
+                return UID;
+            }
+        }
+
+        public SinaWeiboClient(string appKey, string appSecret, string callbackUrl, string accessToken = null, string uid = null)
 			: base(appKey, appSecret, callbackUrl, accessToken)
 		{
 			ClientName = "SinaWeibo";
@@ -131,7 +140,51 @@ namespace NetDimension.OpenAuth.Sina
 			return base.HttpPostAsync(api, parameters);
 		}
 
+        /// <summary>
+        /// 获取用户基本信息
+        /// </summary>
+        /// <param name="accessToken">ACCESS TOKEN</param>
+        /// <param name="userid">用户ID. 就是 http://weibo.com/u/xxxxxxxxxx &lt;- 这一串数字 </param>
+        /// <returns></returns>
+        public override UserBasicInfo GetUserBasicInfomation(String accessToken, String userid)
+        {
+            String requestUrl = String.Format(API_URL, "users/show.json");
+
+            var reply = HttpPost(requestUrl, new
+            {
+                access_token = accessToken,
+                uid = userid
+            });
+
+            if (reply.IsSuccessStatusCode)
+            {
+                var result = reply.Content.ReadAsStringAsync().Result;
+
+                Dictionary<String, String> rep = JsonConvert.DeserializeObject<Dictionary<String, String>>(result);
+
+                UserBasicInfo userInfo = new UserBasicInfo();
+
+                if (rep.ContainsKey("id"))
+                    userInfo.OpenID = rep["id"];
+
+                if (rep.ContainsKey("screen_name"))
+                    userInfo.Name = rep["screen_name"];
+
+                if (rep.ContainsKey("gender"))
+                    userInfo.Gender = rep["gender"] == "m" ? "男" : "女";
+
+                if (rep.ContainsKey("avatar_large"))
+                    userInfo.Avatar = rep["avatar_large"];
+
+                return userInfo;
+            }
+            else
+            {
+                throw new Exception("failed to get user's basic infomation. code = " + reply.StatusCode);
+            }
+        }
 
 
-	}
+
+    }
 }

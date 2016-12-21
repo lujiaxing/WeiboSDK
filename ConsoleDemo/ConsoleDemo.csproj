@@ -85,9 +85,9 @@
       <Project>{76fc909d-bda2-4fce-9b9f-b503a13df44f}</Project>
       <Name>NetDimension.OpenAuth.Sina</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NetDimension.OpenAuth.Tencent\NetDimension.OpenAuth.Tencent.csproj">
+    <ProjectReference Include="..\NetDimension.OpenAuth.Tencent.QQ\NetDimension.OpenAuth.Tencent.QQ.csproj">
       <Project>{df5550c5-b4e3-4697-87b7-f6182dbfbc6f}</Project>
-      <Name>NetDimension.OpenAuth.Tencent</Name>
+      <Name>NetDimension.OpenAuth.Tencent.QQ</Name>
     </ProjectReference>
     <ProjectReference Include="..\NetDimension.OpenAuth.Winform\NetDimension.OpenAuth.Winform.csproj">
       <Project>{0d1f893b-af94-4e52-b972-a5d40e1db670}</Project>

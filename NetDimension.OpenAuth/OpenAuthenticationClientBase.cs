@@ -16,6 +16,8 @@ namespace NetDimension.OpenAuth
 		public string CallbackUrl { get; protected set; }
 		public string AccessToken { get; set; }
 
+        public abstract String UserID { get; }
+
 		public bool IsAuthorized
 		{
 			get { return isAccessTokenSet && !string.IsNullOrEmpty(AccessToken); }
@@ -29,6 +31,14 @@ namespace NetDimension.OpenAuth
 		public abstract string GetAuthorizationUrl();
 
 		public abstract void GetAccessTokenByCode(string code);
+
+        public abstract UserBasicInfo GetUserBasicInfomation(String accessToken, String userOpenId);
+
+        public virtual String RefUrl
+        {
+            get;
+            set;
+        }
 
 		protected HttpClient http;
 
@@ -159,10 +169,12 @@ namespace NetDimension.OpenAuth
 				httpContent = content;
 			}
 
+            if (!String.IsNullOrEmpty(RefUrl))
+                httpContent.Headers.Add("Referer", RefUrl);
 
 
 
-			return http.PostAsync(api, httpContent);
+            return http.PostAsync(api, httpContent);
 		}
 
 		public OpenAuthenticationClientBase(string clientId, string clientSecret, string callbackUrl, string accessToken = null)

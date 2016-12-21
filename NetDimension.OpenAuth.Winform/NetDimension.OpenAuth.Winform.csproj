@@ -55,6 +55,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NetDimension.OpenAuth.Sina\NetDimension.OpenAuth.Sina.csproj">
+      <Project>{76fc909d-bda2-4fce-9b9f-b503a13df44f}</Project>
+      <Name>NetDimension.OpenAuth.Sina</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetDimension.OpenAuth.Tencent.Wechat\NetDimension.OpenAuth.Tencent.Wechat.csproj">
+      <Project>{057d5b14-3114-478e-bd09-852aac0806c7}</Project>
+      <Name>NetDimension.OpenAuth.Tencent.Wechat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetDimension.OpenAuth.Tencent.QQ\NetDimension.OpenAuth.Tencent.QQ.csproj">
+      <Project>{df5550c5-b4e3-4697-87b7-f6182dbfbc6f}</Project>
+      <Name>NetDimension.OpenAuth.Tencent.QQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetDimension.OpenAuth\NetDimension.OpenAuth.csproj">
       <Project>{38b68338-7fc0-4ab7-b8a7-674e0bcbf899}</Project>
       <Name>NetDimension.OpenAuth</Name>
