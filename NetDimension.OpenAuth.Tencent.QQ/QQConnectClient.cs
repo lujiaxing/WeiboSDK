@@ -58,7 +58,7 @@ namespace NetDimension.OpenAuth.Tencent.QQ
 		{
 			var ub = new UriBuilder(AuthorizationCodeUrl);
 
-			ub.Query = string.Format("response_type=code&client_id={0}&redirect_uri={1}&state=QQ&scope=get_user_info,add_t,add_pic_t", ClientId, Uri.EscapeDataString(CallbackUrl));
+			ub.Query = string.Format("response_type=code&client_id={0}&redirect_uri={1}&state={2}&scope=get_user_info,add_t,add_pic_t", ClientId, Uri.EscapeDataString(CallbackUrl), Uri.EscapeDataString(State));
 
 			return ub.ToString();
 

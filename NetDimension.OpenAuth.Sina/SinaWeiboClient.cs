@@ -59,7 +59,7 @@ namespace NetDimension.OpenAuth.Sina
 		public override string GetAuthorizationUrl()
 		{
 			var ub = new UriBuilder(AuthorizationCodeUrl);
-			ub.Query = string.Format("client_id={0}&response_type=code&redirect_uri={1}", ClientId, Uri.EscapeDataString(CallbackUrl));
+			ub.Query = string.Format("client_id={0}&response_type=code&redirect_uri={1}&state={2}", ClientId, Uri.EscapeDataString(CallbackUrl), Uri.EscapeDataString(State));
 
 
 

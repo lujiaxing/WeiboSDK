@@ -16,6 +16,8 @@ namespace NetDimension.OpenAuth
 		public string CallbackUrl { get; protected set; }
 		public string AccessToken { get; set; }
 
+        public string State { get; set; }
+
         public abstract String UserID { get; }
 
 		public bool IsAuthorized

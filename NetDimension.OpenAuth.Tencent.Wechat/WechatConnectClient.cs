@@ -59,7 +59,7 @@ namespace NetDimension.OpenAuth.Tencent.Wechat
 		{
 			var ub = new UriBuilder(AuthorizationCodeUrl);
 
-			ub.Query = string.Format("appid={0}&response_type=code&redirect_uri={1}&state={2}&scope=snsapi_login", ClientId, Uri.EscapeDataString(CallbackUrl), "Wechat");
+			ub.Query = string.Format("appid={0}&response_type=code&redirect_uri={1}&state={2}&scope=snsapi_login", ClientId, Uri.EscapeDataString(CallbackUrl), Uri.EscapeDataString(State));
                 
 			return ub.ToString();
 
